@@ -13,7 +13,7 @@ mongoose
   })
   .then((result) => {
     console.log("Connection Established With The Database");
-    app.listen(3000);
+    app.listen(process.env.PORT);
     console.log("The App is live");
   });
 
