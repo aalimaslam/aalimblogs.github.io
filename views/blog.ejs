@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs | <%= title %></title>
+</head>
+<body>
+    <%- include("./partial/nav.ejs") %>
+    <div class="container text-center">
+        <div class="fs-2 fw-bold py-5"><%= result.title %></div>
+        <div class="fs-4"><%= result.body %></div>
+        <div class="fs-6 my-5 py-3 text-muted">This Blog was Created by <%= result.name %></div>
+    </div>
+
+
+    <%- include("./partial/footer.ejs") %>
+
+</body>
+</html>

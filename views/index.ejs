@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogs | <%= title %></title>
+  </head>
+  <body>
+    <%- include("./partial/nav.ejs") %> <%- include("./partial/carousel.ejs") %>
+
+    <!-- Blogs are going to be here  -->
+
+    <div class="container">
+      <div class="heading fs-2 my-4">Blogs</div>
+
+      <div class="row">
+        <% if(result.length > 0){ %> <% result.forEach(blog => { %>
+        <a href="/blog/<%= blog._id %>">
+          <div class="col-12 my-2 p-4 rounded bg-dark" role="button">
+            <div class="fs-3 fw-bold text-white title"><%= blog.title %></div>
+            <div class="class py-2 text text-muted"><%= blog.body %></div>
+            <div class="footer py-2 text-muted fs-6 lead">
+              This Blog Was Created By <%= blog.name %>
+            </div>
+          </div>
+        </a>
+        <% }) %> <% } else{ %>
+        <div class="fs-3 fw-bold">Oops! Nothing Here Yet</div>
+        <a href="/create-blog">Click here to Create one</a>
+
+        <% } %>
+      </div>
+    </div>
+
+    <%- include("./partial/footer.ejs") %>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | <%= title %> </title>
+</head>
+<body>
+    <%- include("./partial/nav.ejs") %>
+    <h2 class="text-center py-5">Create a Blog</h2>
+    <form class="form container" method="post" action="/">
+        <div class="form-container row">
+            <input type="text" name="name" id="name" placeholder="Your Name..." class="'py-2 my-2 form-control">
+            <input type="text" name="title" placeholder="Blog Title" id="blog-title" class="'py-2 my-2 form-control">
+            <textarea type="text" name="body" id="blog-body" placeholder="Blog Body" rows="10" class="'py-2 my-2 form-control"></textarea>
+            <input type="submit" class="btn btn-dark">
+        </div>
+    </form>
+
+    <%- include("./partial/footer.ejs") %>
+
+</body>
+</html>
