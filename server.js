@@ -6,13 +6,14 @@ const mongoose = require("mongoose");
 const Blog = require("./models/blog");
 //Connecting Database to the server
 //Listening to the request after the connection is Sucessfull
+const port = process.env.PORT || 5000
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then((result) => {
-    app.listen(process.env.PORT || '5000');
+    app.listen(port);
 
   }).catch(err => err);
 
