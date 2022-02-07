@@ -12,10 +12,9 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((result) => {
-    console.log("Connection Established With The Database");
-    app.listen(process.env.PORT);
-    console.log("The App is live");
-  });
+    app.listen(process.env.PORT || '5000');
+
+  }).catch(err => err);
 
 //setting view engine as ejs
 app.set("view engine", "ejs");
