@@ -1,5 +1,5 @@
 {
-  "name": "thedevmin",
+  "name": "aalimblogs",
   "version": "1.0.0",
   "engines": {
     "node": "14.17.4",
@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Aalim aslam",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.0",
