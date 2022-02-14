@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Posts</title>
+  </head>
+  <body>
+    <%- include("./partial/nav.ejs") %>
+    <div class="d-flex">
+      <%- include("./partial/sidebar.ejs") %>
+
+      <div clas="container text-center">
+        <div class="row col-10 mx-5 text-center">
+          <% if(result.length > 0){ %> <% result.forEach(blog => { %>
+          <a href="/blog/<%= blog._id %>">
+            <div class="col-8 my-2 p-4 rounded bg-dark" role="button">
+              <div class="fs-3 fw-bold text-white title"><%= blog.title %></div>
+              <div class="class py-2 text text-muted">
+                <%= blog.body.length < 50 ? blog.body :
+                blog.body.slice(0,50).concat(".............") %>
+              </div>
+              <div class="footer py-2 text-muted fs-6 lead">
+                This Blog Was Created By <%= blog.name %>
+              </div>
+              <a data-doc="<%= blog._id %>" class="btn btn-outline-danger">Delete</a>
+            </div>
+          </a>
+          <% }) %> <% } else{ %>
+          <div class="fs-3 fw-bold">Oops! Nothing Here Yet</div>
+          <a href="/create-blog">Click here to Create one</a>
+
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const deleteBtn = document.querySelector("a.btn-outline-danger");
+      deleteBtn.addEventListener("click", (e) => {
+        const endpoint = `/blog/${deleteBtn.dataset.doc}`;
+        fetch(endpoint, {
+          method: "DELETE"
+        })
+          .then((response) => {
+            window.location.href = "/25680/admin/posts"
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    </script>
+  </body>
+</html>

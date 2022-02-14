@@ -1,12 +1,14 @@
 const express = require("express");
-const res = require("express/lib/response");
-require("dotenv").config();
 const app = express();
+require("dotenv").config();
 const mongoose = require("mongoose");
 const Blog = require("./models/blog");
+const blogRoutes = require("./blogRoutes");
+const adminRoutes = require("./adminRoutes");
 //Connecting Database to the server
 //Listening to the request after the connection is Sucessfull
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
+
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -14,15 +16,18 @@ mongoose
   })
   .then((result) => {
     app.listen(port);
-
-  }).catch(err => err);
+  })
+  .catch((err) => err);
 
 //setting view engine as ejs
+
 app.set("view engine", "ejs");
 
 //To use the data comning from create page
 // attaches body property to the request object
 app.use(express.urlencoded({ extended: true }));
+
+
 
 app.get("/", (req, res) => {
   Blog.find()
@@ -32,9 +37,9 @@ app.get("/", (req, res) => {
     });
 });
 
-//adding data to database
 
-app.post("/", (req, res) => {
+//adding data to database
+app.post("/", (req, res) => {;
   const blog = new Blog(req.body);
   blog
     .save()
@@ -44,32 +49,26 @@ app.post("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+//admin routes
 
-app.get("/create-blog", (req, res) => {
-  res.render("create", { title: "Create" });
-});
-app.get("/blog/:id", (req, res) => {
-    const id = req.params.id;
-    Blog.findById(id).then(result=>{
-        res.render("blog", { title: "Blog" , result});
-    })
-});
+app.use("/25680/admin", adminRoutes)
+
+
+//Blog Routes
+
+app.use("/" , blogRoutes)
+
+
+//About Route
+
 app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });
 
-// Blog Routes
+
+
+//404 Route
 
 app.use((req, res) => {
   res.status(404).render("404", { title: "404" });
 });
-
-// const blog = new Blog({
-//     name: "aalim",
-//     title : "hi",
-//     body: "hello i am aalim aslam bhatt"
-// })
-// blog.save()
-// .then((result)=>{
-//     res.send(result)
-// })
